@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './todoApp.css'
 import {useNavigate} from 'react-router-dom'
+import { useAuth } from './security/AuthContext'
 
 export default function LoginComponent() {
     const [username, setUsername] = useState('')
@@ -8,6 +9,7 @@ export default function LoginComponent() {
     const [successMessage, setSuccessMessage] = useState(false)
     const [errorMessage, setErrorMessage] = useState(false)
     const Navigate = useNavigate()
+    const authContext = useAuth() //AuthContext.js
 
     function handleUsenameChange(e){
         setUsername(e.target.value)
@@ -15,14 +17,27 @@ export default function LoginComponent() {
     function handlePasswordChange(e){
         setPassword(e.target.value)
     }
-    function handleLogin(){
-        if(username==='Thisara' && password==='dummy'){
-            setSuccessMessage(true)
-            setErrorMessage(false)
-            Navigate(`/welcome/${username}`)
+    // Method 1
+    // function handleLogin(){
+    //     if(username==='Thisara' && password==='dummy'){
+    //         //AuthContext.js -> authContext.setAuthenticated(true)
+    //         authContext.setAuthenticated(true)
+    //         setSuccessMessage(true)
+    //         setErrorMessage(false)
+    //         Navigate(`/welcome/${username}`)
 
+    //     }else{
+    //         authContext.setAuthenticated(false)
+    //         setSuccessMessage(false)
+    //         setErrorMessage(true)
+    //     }
+    // }
+
+    //Method 2
+    function handleLogin(){
+        if(authContext.login(username,password)){
+            Navigate(`/welcome/${username}`)
         }else{
-            setSuccessMessage(false)
             setErrorMessage(true)
         }
     }
@@ -41,7 +56,7 @@ export default function LoginComponent() {
     <div className='Login'>
         <h1>Time To Login</h1>
         {/* SHORTCUT AUTH */}
-        {successMessage && <div className='successMessage'>Successfuly Logedin</div>}
+        {/* {successMessage && <div className='successMessage'>Successfuly Logedin</div>} */}
         {errorMessage && <div className='errorMessage'>Invalid Credentials</div>}
         
         <div className='LoginForm'>
