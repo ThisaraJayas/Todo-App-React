@@ -5,19 +5,27 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import './todoApp.css'
 import ErrorComponent from './ErrorComponent'
 import ListTodosComponent from './ListTodosComponent'
+import HeaderComponent from './HeaderComponent'
+import FooterComponent from './FooterComponent'
+import LogoutComponent from './LogoutComponent'
 
 export default function TodoApp() {
   return (
     <div className='TodoApp'>
+        
         <BrowserRouter>
+        <HeaderComponent/>
             <Routes>
                 <Route path='/' element={<LoginComponent/>} />
                 <Route path='/login' element={<LoginComponent/>} />
                 <Route path='/welcome/:username' element={<WelcomeComponent/>}/>
                 <Route path='*' element={<ErrorComponent/>}/> {/* if url not match */}
                 <Route path='/todos' element={<ListTodosComponent/>}/>
+                <Route path='/logout' element={<LogoutComponent/>}/>
             </Routes>
+            <FooterComponent/>
         </BrowserRouter>
+        
     </div>
   )
 }

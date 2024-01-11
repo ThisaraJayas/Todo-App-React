@@ -10,3 +10,17 @@
     margin-top: 5%;
     text-align: center;
 }
+.header{
+    margin-top: 5%;
+    text-align: center;
+}
+footer{
+    bottom: 0;
+     position: absolute; /* //so always remain at bottom */
+     width: 90%;
+     height: 40px;
+}
+.loggedout{
+    margin-top: 5%;
+    text-align: center;
+}
