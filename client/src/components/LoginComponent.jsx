@@ -34,8 +34,8 @@ export default function LoginComponent() {
     // }
 
     //Method 2
-    function handleLogin(){
-        if(authContext.login(username,password)){
+    async function handleLogin(){
+        if(await authContext.login(username,password)){
             Navigate(`/welcome/${username}`)
         }else{
             setErrorMessage(true)
